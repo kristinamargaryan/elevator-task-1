@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+body { 
+    display: flex;
+    justify-content: center; 
+  }
+  .main {
+    display: flex;
+    min-width: 30%;
+    height: 500px; 
+  }
+  .elevator {
+    display: flex;
+    position: relative;
+    width: 50%;
+    border: 1px solid black; 
+  
+  }
+  .level {
+    width: 50%;
+    border: 1px solid black;
+    position: relative;
+    display: flex;  
+    
+    
+  }
+  .elev {
+    top: 10px;
+    padding: 14px;
+    border: 1px solid black;
+    position: absolute;
+  }
+  .lev {
+    cursor: pointer;
+    position: absolute; 
+    border-top: 1px solid black; 
+    width: 100%;
+    display: block;
+    padding: 15px 50%;
+  }
