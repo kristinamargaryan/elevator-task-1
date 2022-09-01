@@ -9,14 +9,11 @@ function getRandomNumberBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 function createBuilding(elevCount, levelCount) {
-  
   const minDiv = document.querySelector(".main") 
   minDiv.style.height = `${MARGIN + levelCount * TOP }px`;
   minDiv.style.width = `${MARGIN + elevCount * RIGHT}px`;
-
   function creatingDiv(prop) {
     let { node, append, index, clName, horizon } = prop;
-
     node.className = clName;
     node.dataIndex = index + 1;
     node.innerText = index + 1;
@@ -34,10 +31,13 @@ function createBuilding(elevCount, levelCount) {
       node.style.top = `${MARGIN + TOP * (levelCount - index - 1)}px`;
       node.addEventListener("click", (ev) => {
         let randoms = [];
-        let min = Infinity;
+        let min = Infinity; 
+        let count = 0;
         for (let elev of elevsPasitions) {
+          if(elev.drag){
+            count++
+          }
           if (Math.abs(elev.position - ev.target.dataIndex) < min && elev.drag) {
-            
             min = Math.abs(elev.position - ev.target.dataIndex);
             randoms = [elev.id];
           } else if (Math.abs(elev.position - ev.target.dataIndex) == min) {
@@ -45,10 +45,12 @@ function createBuilding(elevCount, levelCount) {
           }
           else if(elev.position - ev.target.dataIndex==0){
             return
-          }
-          elev.drag=true
+          } 
         }
-        
+        if(count == 0){
+          alert('Reload the page to start over')       
+        }
+         
         if (min == 0) {
           return;
         } else {
@@ -57,8 +59,6 @@ function createBuilding(elevCount, levelCount) {
           dragible.style.top = `${MARGIN + TOP * (levelCount - index - 1)}px`; 
           elevsPasitions[randoms[id] - 1].position = ev.target.dataIndex;
           elevsPasitions[randoms[id] - 1].drag = false;
-
-          
         }
       });
     }
@@ -82,7 +82,7 @@ function createBuilding(elevCount, levelCount) {
       clName: "lev",
       vertical: true,
     });
-  } 
+  }
 }
 
 createBuilding(3, 20);
